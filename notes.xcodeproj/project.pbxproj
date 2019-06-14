@@ -13,6 +13,7 @@
 		A965676622B4372100FA96D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A965676522B4372100FA96D2 /* Assets.xcassets */; };
 		A965676922B4372100FA96D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A965676722B4372100FA96D2 /* LaunchScreen.storyboard */; };
 		A965677422B4372100FA96D2 /* notesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965677322B4372100FA96D2 /* notesTests.swift */; };
+		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		A965676F22B4372100FA96D2 /* notesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = notesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A965677322B4372100FA96D2 /* notesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesTests.swift; sourceTree = "<group>"; };
 		A965677522B4372100FA96D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1111609EC7F4856379AFCCB /* Pods-notesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notesTests.debug.xcconfig"; path = "Target Support Files/Pods-notesTests/Pods-notesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				A965675E22B4372000FA96D2 /* AppDelegate.swift */,
+				A999C11C22B43A120020F475 /* AppCoordinator.swift */,
 				A965676522B4372100FA96D2 /* Assets.xcassets */,
 				A965676722B4372100FA96D2 /* LaunchScreen.storyboard */,
 				A965676A22B4372100FA96D2 /* Info.plist */,
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */,
 				A965675F22B4372000FA96D2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
