@@ -12,3 +12,5 @@ struct Note: Codable {
     let id: Int
     let title: String
 }
+
+extension Note: Equatable {}

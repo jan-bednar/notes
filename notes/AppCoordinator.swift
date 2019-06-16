@@ -12,10 +12,14 @@ protocol Coordinator {
     func start()
 }
 
+struct Dependencies {
+    let networkClient: NetworkClient = NetworkClientImpl()
+}
+
 class AppCoordinator: Coordinator {
     
-    let navigationController: UINavigationController
-    
+    private let navigationController: UINavigationController
+    private let dependencies = Dependencies()
     private var childCoordinators: [Coordinator] = []
     
     init(navigationController: UINavigationController) {
@@ -23,8 +27,21 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = UIViewController()
-        navigationController.pushViewController(viewController, animated: false)
+        let listCoordinator = ListCoordinator(navigationController: navigationController, networkClient: dependencies.networkClient)
+        listCoordinator.delegate = self
+        listCoordinator.start()
+        childCoordinators.append(listCoordinator)
+    }
+}
+
+extension AppCoordinator: ListCoordinatorDelegate {
+    func listCoordinatorSelect(note: Note) {
+        //
     }
     
+    func listCoordinatorCreateNewNote() {
+        //
+    }
 }
+
+
