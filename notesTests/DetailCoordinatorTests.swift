@@ -11,8 +11,7 @@ import XCTest
 
 class DetailCoordinatorTests: XCTestCase {
 
-    let networkClient: NetworkClient = NetworkClientImpl()
-    var mockNetworkClient: NetworkClient!
+    let noteService: NoteService = NoteServiceImpl(networkClient: NetworkClientImpl())
     let navigationController = UINavigationController()
     
     override func setUp() {
@@ -21,7 +20,7 @@ class DetailCoordinatorTests: XCTestCase {
     }
 
     func test_afterStart_presentedViewControllerIsDetailControllerAndHasDelegate() {
-        let detailCoordinator = DetailCoordinator(navigationController: navigationController, networkClient: networkClient, note: nil)
+        let detailCoordinator = DetailCoordinator(navigationController: navigationController, noteService: noteService, note: nil)
         detailCoordinator.start(animated: false)
         
         let visibleController = navigationController.visibleViewController as? DetailViewController

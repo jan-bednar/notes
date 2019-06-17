@@ -38,6 +38,7 @@
 		A984530222B7B3BA00199EBC /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A984530022B7B3BA00199EBC /* LoadingViewController.xib */; };
 		A984530422B7BACB00199EBC /* DetailCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */; };
 		A984530622B81ED700199EBC /* HasLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530522B81ED700199EBC /* HasLoading.swift */; };
+		A984530B22B82DD000199EBC /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530A22B82DD000199EBC /* NoteService.swift */; };
 		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		A984530022B7B3BA00199EBC /* LoadingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
 		A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinatorTests.swift; sourceTree = "<group>"; };
 		A984530522B81ED700199EBC /* HasLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasLoading.swift; sourceTree = "<group>"; };
+		A984530A22B82DD000199EBC /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,7 +143,6 @@
 				A9511F6622B6448900948518 /* NetworkRequest.swift */,
 				A9511F6D22B646A300948518 /* NetworkClient.swift */,
 				A9511F7222B64BB100948518 /* EmptyResponse.swift */,
-				A9511F6F22B64B5B00948518 /* NoteReqeusts */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -153,20 +154,6 @@
 				A9511F6B22B6469700948518 /* NewNote.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		A9511F6F22B64B5B00948518 /* NoteReqeusts */ = {
-			isa = PBXGroup;
-			children = (
-				A9511F7022B64B6E00948518 /* NoteRequest.swift */,
-				A9511F7422B64CD300948518 /* NotesRequest.swift */,
-				A9511F7622B64D2100948518 /* ListNotesRequest.swift */,
-				A9511F7822B64D7D00948518 /* CreateNoteRequest.swift */,
-				A9511F7A22B64DEE00948518 /* GetNoteRequest.swift */,
-				A9511F7C22B64E4600948518 /* UpdateNoteRequest.swift */,
-				A9511F7E22B64EA300948518 /* RemoveNoteRequest.swift */,
-			);
-			path = NoteReqeusts;
 			sourceTree = "<group>";
 		};
 		A9511F8422B669D800948518 /* List */ = {
@@ -231,11 +218,11 @@
 		A965675D22B4372000FA96D2 /* notes */ = {
 			isa = PBXGroup;
 			children = (
+				A984530922B82DC400199EBC /* Services */,
 				A965675E22B4372000FA96D2 /* AppDelegate.swift */,
 				A999C11C22B43A120020F475 /* AppCoordinator.swift */,
 				A984530722B82CDE00199EBC /* Utility */,
 				A9511F8622B669F200948518 /* Scenes */,
-				A9511F6822B6459A00948518 /* Models */,
 				A9511F6522B6440400948518 /* Networking */,
 				A9511F8722B669FD00948518 /* Resources */,
 			);
@@ -270,6 +257,38 @@
 				A984530022B7B3BA00199EBC /* LoadingViewController.xib */,
 			);
 			path = LoadingViewController;
+			sourceTree = "<group>";
+		};
+		A984530922B82DC400199EBC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A984530C22B82E2D00199EBC /* NoteService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A984530C22B82E2D00199EBC /* NoteService */ = {
+			isa = PBXGroup;
+			children = (
+				A9511F6822B6459A00948518 /* Models */,
+				A984530D22B82E3A00199EBC /* Networking */,
+				A984530A22B82DD000199EBC /* NoteService.swift */,
+			);
+			path = NoteService;
+			sourceTree = "<group>";
+		};
+		A984530D22B82E3A00199EBC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A9511F7022B64B6E00948518 /* NoteRequest.swift */,
+				A9511F7422B64CD300948518 /* NotesRequest.swift */,
+				A9511F7622B64D2100948518 /* ListNotesRequest.swift */,
+				A9511F7822B64D7D00948518 /* CreateNoteRequest.swift */,
+				A9511F7A22B64DEE00948518 /* GetNoteRequest.swift */,
+				A9511F7C22B64E4600948518 /* UpdateNoteRequest.swift */,
+				A9511F7E22B64EA300948518 /* RemoveNoteRequest.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,6 +472,7 @@
 				A9511F7B22B64DEE00948518 /* GetNoteRequest.swift in Sources */,
 				A98452FE22B7B0BD00199EBC /* ErrorPresentable.swift in Sources */,
 				A965675F22B4372000FA96D2 /* AppDelegate.swift in Sources */,
+				A984530B22B82DD000199EBC /* NoteService.swift in Sources */,
 				A9511F7D22B64E4600948518 /* UpdateNoteRequest.swift in Sources */,
 				A9463DBE22B6E75F0070896A /* DetailViewController.swift in Sources */,
 				A9511F7722B64D2100948518 /* ListNotesRequest.swift in Sources */,

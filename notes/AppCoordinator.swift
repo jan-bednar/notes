@@ -12,8 +12,9 @@ protocol Coordinator {
     func start(animated: Bool)
 }
 
-struct Dependencies {
+class Dependencies {
     let networkClient: NetworkClient = NetworkClientImpl()
+    lazy var noteService: NoteService = NoteServiceImpl(networkClient: networkClient)
 }
 
 class AppCoordinator: Coordinator {
@@ -27,14 +28,14 @@ class AppCoordinator: Coordinator {
     }
     
     func start(animated: Bool) {
-        let listCoordinator = ListCoordinator(navigationController: navigationController, networkClient: dependencies.networkClient)
+        let listCoordinator = ListCoordinator(navigationController: navigationController, noteService: dependencies.noteService)
         listCoordinator.delegate = self
         listCoordinator.start(animated: animated)
         childCoordinators.append(listCoordinator)
     }
     
     private func startDetailCoordinator(note: Note?) {
-        let detailCoordinator = DetailCoordinator(navigationController: navigationController, networkClient: dependencies.networkClient, note: note)
+        let detailCoordinator = DetailCoordinator(navigationController: navigationController, noteService: dependencies.noteService, note: note)
         detailCoordinator.start(animated: true)
         detailCoordinator.delegate = self
         childCoordinators.append(detailCoordinator)

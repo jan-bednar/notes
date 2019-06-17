@@ -18,15 +18,15 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
     
     weak var delegate: ListCoordinatorDelegate?
     private let navigationController: UINavigationController
-    private let networkClient: NetworkClient
+    private let noteService: NoteService
     
     private lazy var listViewController = ListTableViewController()
     
     private var notes: [Note] = []
     
-    init(navigationController: UINavigationController, networkClient: NetworkClient) {
+    init(navigationController: UINavigationController, noteService: NoteService) {
         self.navigationController = navigationController
-        self.networkClient = networkClient
+        self.noteService = noteService
     }
     
     func start(animated: Bool) {
@@ -35,7 +35,7 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
         navigationController.pushViewController(listViewController, animated: animated)
         let (loadingPromise, loadingViewController) = showLoading(in: listViewController, animated: false)
 
-        when(fulfilled: loadingPromise, getNotes())
+        when(fulfilled: loadingPromise, noteService.getNotes())
             .ensure { [weak self] in
                 self?.remove(loadingViewController: loadingViewController)
             }
@@ -63,7 +63,7 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
     }
     
     private func refreshNotes() {
-        getNotes()
+        noteService.getNotes()
             .done { [weak self] notes in
                 self?.notes = notes
                 self?.listViewController.update(notes: notes)
@@ -71,12 +71,6 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
                 self?.listViewController.update(notes: self?.notes ?? [])
                 self?.show(error: error, text: NSLocalizedString("list_get_notes_error", comment: "Could not download notes"), on: self?.navigationController)
             }
-    }
-    
-    private func getNotes() -> Promise<[Note]> {
-        let request = ListNotesRequest()
-        return networkClient.make(dataRequest: request)
-            .map { $0.sorted(by: { $0.id >= $1.id }) }
     }
 }
 
@@ -95,8 +89,7 @@ extension ListCoordinator: ListTableViewControllerDelegate {
     }
     
     func listTableViewControllerDelete(note: Note) {
-        let request = RemoveNoteRequest(noteId: note.id)
-        networkClient.make(request: request)
+        noteService.remove(note: note)
             .catch { [weak self] error in
                 self?.show(error: error, text: NSLocalizedString("list_delete_note_error", comment: "Deleting note has failed"), on: self?.navigationController)
             }

@@ -19,13 +19,13 @@ class DetailCoordinator: Coordinator, ErrorPresentable, HasLoading {
     weak var delegate: DetailCoordinatorDelegate?
     
     private let navigationController: UINavigationController
-    private let networkClient: NetworkClient
+    private let noteService: NoteService
     private let note: Note?
     private var loadingViewController: LoadingViewController?
     
-    init(navigationController: UINavigationController, networkClient: NetworkClient, note: Note?) {
+    init(navigationController: UINavigationController, noteService: NoteService, note: Note?) {
         self.navigationController = navigationController
-        self.networkClient = networkClient
+        self.noteService = noteService
         self.note = note
     }
     
@@ -39,27 +39,21 @@ class DetailCoordinator: Coordinator, ErrorPresentable, HasLoading {
         navigationController.present(detailNavigationController, animated: animated, completion: nil)
     }
     
-    func createNote(text: String) {
-        let newNote = NewNote(title: text)
-        let request = CreateNoteRequest(newNote: newNote)
-        make(request: request, errorMessage: NSLocalizedString("detail_create_note_error", comment: "Creating note has failed"))
+    private func createNote(text: String) {
+        handle(promise: noteService.createNote(text: text), errorMessage: NSLocalizedString("detail_create_note_error", comment: "Creating note has failed"))
     }
     
-    func updateNote(text: String, id: Int) {
-        let newNote = NewNote(title: text)
-        let request = UpdateNoteRequest(noteId: id, newNote: newNote)
-        make(request: request, errorMessage: NSLocalizedString("detail_update_note_error", comment: "Updating note has failed"))
+    private func updateNote(text: String, id: Int) {
+        handle(promise: noteService.updateNote(text: text, id: id), errorMessage: NSLocalizedString("detail_update_note_error", comment: "Updating note has failed"))
     }
     
-    func remove(note: Note) {
+    private func remove(note: Note) {
         guard let visibleViewController = navigationController.visibleViewController else {
             return
         }
-        
-        let request = RemoveNoteRequest(noteId: note.id)
         let (loadingPromise, loadingViewController) = showLoading(in: visibleViewController)
     
-        when(fulfilled: loadingPromise, networkClient.make(request: request))
+        when(fulfilled: loadingPromise, noteService.remove(note: note) )
             .ensureThen { [weak self] in
                 self?.remove(loadingViewController: loadingViewController) ?? Guarantee()
             }.done { [weak self] _ in
@@ -71,14 +65,14 @@ class DetailCoordinator: Coordinator, ErrorPresentable, HasLoading {
             }
     }
     
-    private func make<T: NetworkRequest>(request: T, errorMessage: String) where T.Response == Note {
+    private func handle(promise: Promise<Note>, errorMessage: String) {
         guard let visibleViewController = navigationController.visibleViewController else {
             return
         }
         
         let (loadingPromise, loadingViewController) = showLoading(in: visibleViewController)
         
-        when(fulfilled: loadingPromise, networkClient.make(dataRequest: request))
+        when(fulfilled: loadingPromise, promise)
             .ensureThen { [weak self] in
                 self?.remove(loadingViewController: loadingViewController) ?? Guarantee()
             }.done { [weak self] (_, note) in
