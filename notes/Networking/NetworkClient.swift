@@ -9,11 +9,12 @@
 import PromiseKit
 import Alamofire
 
-protocol NetworkingClient {
-    func make<T: NetworkRequest>(request: T) -> Promise<T.Response>
+protocol NetworkClient {
+    func make<T: NetworkRequest>(dataRequest: T) -> Promise<T.Response>
+    func make<T: NetworkRequest>(request: T) -> Promise<Void>
 }
 
-class NetworkingClientImpl: NetworkingClient {
+class NetworkClientImpl: NetworkClient {
     
     private let sessionManager: SessionManager
     private let dispatchQueue: DispatchQueue
@@ -25,14 +26,24 @@ class NetworkingClientImpl: NetworkingClient {
         self.decoder = decoder
     }
     
-    func make<T>(request: T) -> Promise<T.Response> where T : NetworkRequest {
+    func make<T: NetworkRequest>(dataRequest: T) -> Promise<T.Response> {
         return Promise(resolver: { resolver in
-            let request = sessionManager.request(request)
+            let request = sessionManager.request(dataRequest)
             request.validate()
                 .responseData(queue: dispatchQueue, completionHandler: { [weak self] response in
                     self?.handle(response, for: request, resolver: resolver)
                 })
         })
+    }
+    
+    func make<T: NetworkRequest>(request: T) -> Promise<Void> {
+        return Promise(resolver: { resolver in
+            let request = sessionManager.request(request)
+            request.validate()
+                .response(queue: dispatchQueue, completionHandler: { response in
+                    resolver.resolve(response.error)
+                })
+            })
     }
     
     private func handle<T: Decodable>(_ response: DataResponse<Data>, for request: DataRequest, resolver: Resolver<T>) {
