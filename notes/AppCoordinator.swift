@@ -9,7 +9,7 @@
 import UIKit
 
 protocol Coordinator {
-    func start()
+    func start(animated: Bool)
 }
 
 struct Dependencies {
@@ -26,22 +26,46 @@ class AppCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
+    func start(animated: Bool) {
         let listCoordinator = ListCoordinator(navigationController: navigationController, networkClient: dependencies.networkClient)
         listCoordinator.delegate = self
-        listCoordinator.start()
+        listCoordinator.start(animated: animated)
         childCoordinators.append(listCoordinator)
+    }
+    
+    private func startDetailCoordinator(note: Note?) {
+        let detailCoordinator = DetailCoordinator(navigationController: navigationController, networkClient: dependencies.networkClient, note: note)
+        detailCoordinator.start(animated: true)
+        detailCoordinator.delegate = self
+        childCoordinators.append(detailCoordinator)
+    }
+    
+    func getChildCoordinator<T: Coordinator>(type: T.Type) -> T? {
+        return childCoordinators.first(where: { $0.self is T }) as? T
     }
 }
 
 extension AppCoordinator: ListCoordinatorDelegate {
     func listCoordinatorSelect(note: Note) {
-        //
+        startDetailCoordinator(note: note)
     }
     
     func listCoordinatorCreateNewNote() {
-        //
+        startDetailCoordinator(note: nil)
     }
 }
 
-
+extension AppCoordinator: DetailCoordinatorDelegate {
+    func detailCoordinatorFinished(note: Note?) {
+        childCoordinators.removeAll(where: { $0.self is DetailCoordinator })
+        guard let note = note else {
+            return
+        }
+        getChildCoordinator(type: ListCoordinator.self)?.updateOrAdd(note: note)
+    }
+    
+    func detailCoordinatorDeleted(note: Note) {
+        childCoordinators.removeAll(where: { $0.self is DetailCoordinator })
+        getChildCoordinator(type: ListCoordinator.self)?.remove(note: note)
+    }
+}

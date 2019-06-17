@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import PromiseKit
 
 protocol ListCoordinatorDelegate: AnyObject {
     func listCoordinatorSelect(note: Note)
     func listCoordinatorCreateNewNote()
 }
 
-class ListCoordinator: Coordinator {
+class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
     
     weak var delegate: ListCoordinatorDelegate?
     private let navigationController: UINavigationController
@@ -21,45 +22,83 @@ class ListCoordinator: Coordinator {
     
     private lazy var listViewController = ListTableViewController()
     
+    private var notes: [Note] = []
+    
     init(navigationController: UINavigationController, networkClient: NetworkClient) {
         self.navigationController = navigationController
         self.networkClient = networkClient
     }
     
-    func start() {
+    func start(animated: Bool) {
+        navigationController.navigationBar.prefersLargeTitles = true
         listViewController.delegate = self
-        navigationController.pushViewController(listViewController, animated: true)
-        getNotes()
-    }
-    
-    private func getNotes() {
-        let request = ListNotesRequest()
-        networkClient.make(dataRequest: request)
-            .done { [weak self] notes in
+        navigationController.pushViewController(listViewController, animated: animated)
+        let (loadingPromise, loadingViewController) = showLoading(in: listViewController, animated: false)
+
+        when(fulfilled: loadingPromise, getNotes())
+            .ensure { [weak self] in
+                self?.remove(loadingViewController: loadingViewController)
+            }
+            .done { [weak self] _, notes in
+                self?.notes = notes
                 self?.listViewController.update(notes: notes)
             }.catch { [weak self] error in
-                self?.listViewController.update(notes: [])
-                self?.show(error: error, text: NSLocalizedString("list_get_notes_error", comment: "Could not download notes"))
+                self?.listViewController.update(notes: self?.notes ?? [])
+                self?.show(error: error, text: NSLocalizedString("list_get_notes_error", comment: "Could not download notes"), on: self?.navigationController)
+        }
+    }
+    
+    func remove(note: Note) {
+        notes = notes.filter { $0 != note }
+        listViewController.update(notes: notes)
+    }
+    
+    func updateOrAdd(note: Note) {
+        if let index = notes.firstIndex(where: { $0.id == note.id }) {
+            notes[index] = note
+        } else {
+            notes.insert(note, at: 0)
+        }
+        listViewController.update(notes: notes)
+    }
+    
+    private func refreshNotes() {
+        getNotes()
+            .done { [weak self] notes in
+                self?.notes = notes
+                self?.listViewController.update(notes: notes)
+            }.catch { [weak self] error in
+                self?.listViewController.update(notes: self?.notes ?? [])
+                self?.show(error: error, text: NSLocalizedString("list_get_notes_error", comment: "Could not download notes"), on: self?.navigationController)
             }
     }
     
-    private func show(error: Error, text: String?) {
-        let title = text ?? NSLocalizedString("general_alert_title", comment: "Oops, tha's not good!")
-        let alertController = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("general_ok", comment: "OK"), style: .default, handler: { [weak self] _ in
-            self?.navigationController.topViewController?.dismiss(animated: true, completion: nil)
-        })
-        alertController.addAction(okAction)
-        navigationController.topViewController?.present(alertController, animated: true)
+    private func getNotes() -> Promise<[Note]> {
+        let request = ListNotesRequest()
+        return networkClient.make(dataRequest: request)
+            .map { $0.sorted(by: { $0.id >= $1.id }) }
     }
 }
 
 extension ListCoordinator: ListTableViewControllerDelegate {
+    func listTableViewControllerCreateNewNote() {
+        delegate?.listCoordinatorCreateNewNote()
+    }
+    
+    func listTableViewControllerSearch(text: String?) {
+        if let text = text?.lowercased(), !text.isEmpty {
+            let filteredNotes = notes.filter{ $0.title.lowercased().contains(text) }
+            listViewController.update(notes: filteredNotes)
+        } else {
+            listViewController.update(notes: notes)
+        }
+    }
+    
     func listTableViewControllerDelete(note: Note) {
         let request = RemoveNoteRequest(noteId: note.id)
         networkClient.make(request: request)
             .catch { [weak self] error in
-                self?.show(error: error, text: NSLocalizedString("list_delete_note_error", comment: "Deleting note has failed"))
+                self?.show(error: error, text: NSLocalizedString("list_delete_note_error", comment: "Deleting note has failed"), on: self?.navigationController)
             }
     }
     
@@ -68,6 +107,6 @@ extension ListCoordinator: ListTableViewControllerDelegate {
     }
     
     func listTableViewControllerRefresh() {
-        getNotes()
+        refreshNotes()
     }
 }
