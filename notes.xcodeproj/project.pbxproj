@@ -32,6 +32,13 @@
 		A965676622B4372100FA96D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A965676522B4372100FA96D2 /* Assets.xcassets */; };
 		A965676922B4372100FA96D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A965676722B4372100FA96D2 /* LaunchScreen.storyboard */; };
 		A965677422B4372100FA96D2 /* notesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965677322B4372100FA96D2 /* notesTests.swift */; };
+		A98452FC22B7AE7F00199EBC /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98452FB22B7AE7F00199EBC /* DetailCoordinator.swift */; };
+		A98452FE22B7B0BD00199EBC /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98452FD22B7B0BD00199EBC /* ErrorPresentable.swift */; };
+		A984530122B7B3BA00199EBC /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98452FF22B7B3BA00199EBC /* LoadingViewController.swift */; };
+		A984530222B7B3BA00199EBC /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A984530022B7B3BA00199EBC /* LoadingViewController.xib */; };
+		A984530422B7BACB00199EBC /* DetailCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */; };
+		A984530622B81ED700199EBC /* HasLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530522B81ED700199EBC /* HasLoading.swift */; };
+		A984530B22B82DD000199EBC /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530A22B82DD000199EBC /* NoteService.swift */; };
 		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +82,13 @@
 		A965676F22B4372100FA96D2 /* notesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = notesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A965677322B4372100FA96D2 /* notesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesTests.swift; sourceTree = "<group>"; };
 		A965677522B4372100FA96D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A98452FB22B7AE7F00199EBC /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
+		A98452FD22B7B0BD00199EBC /* ErrorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
+		A98452FF22B7B3BA00199EBC /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		A984530022B7B3BA00199EBC /* LoadingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
+		A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinatorTests.swift; sourceTree = "<group>"; };
+		A984530522B81ED700199EBC /* HasLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasLoading.swift; sourceTree = "<group>"; };
+		A984530A22B82DD000199EBC /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +143,6 @@
 				A9511F6622B6448900948518 /* NetworkRequest.swift */,
 				A9511F6D22B646A300948518 /* NetworkClient.swift */,
 				A9511F7222B64BB100948518 /* EmptyResponse.swift */,
-				A9511F6F22B64B5B00948518 /* NoteReqeusts */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -141,20 +154,6 @@
 				A9511F6B22B6469700948518 /* NewNote.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		A9511F6F22B64B5B00948518 /* NoteReqeusts */ = {
-			isa = PBXGroup;
-			children = (
-				A9511F7022B64B6E00948518 /* NoteRequest.swift */,
-				A9511F7422B64CD300948518 /* NotesRequest.swift */,
-				A9511F7622B64D2100948518 /* ListNotesRequest.swift */,
-				A9511F7822B64D7D00948518 /* CreateNoteRequest.swift */,
-				A9511F7A22B64DEE00948518 /* GetNoteRequest.swift */,
-				A9511F7C22B64E4600948518 /* UpdateNoteRequest.swift */,
-				A9511F7E22B64EA300948518 /* RemoveNoteRequest.swift */,
-			);
-			path = NoteReqeusts;
 			sourceTree = "<group>";
 		};
 		A9511F8422B669D800948518 /* List */ = {
@@ -170,6 +169,7 @@
 		A9511F8522B669E100948518 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				A98452FB22B7AE7F00199EBC /* DetailCoordinator.swift */,
 				A9463DBC22B6E75F0070896A /* DetailViewController.swift */,
 				A9463DBD22B6E75F0070896A /* DetailViewController.xib */,
 			);
@@ -218,10 +218,11 @@
 		A965675D22B4372000FA96D2 /* notes */ = {
 			isa = PBXGroup;
 			children = (
+				A984530922B82DC400199EBC /* Services */,
 				A965675E22B4372000FA96D2 /* AppDelegate.swift */,
 				A999C11C22B43A120020F475 /* AppCoordinator.swift */,
+				A984530722B82CDE00199EBC /* Utility */,
 				A9511F8622B669F200948518 /* Scenes */,
-				A9511F6822B6459A00948518 /* Models */,
 				A9511F6522B6440400948518 /* Networking */,
 				A9511F8722B669FD00948518 /* Resources */,
 			);
@@ -234,8 +235,60 @@
 				A965677322B4372100FA96D2 /* notesTests.swift */,
 				A965677522B4372100FA96D2 /* Info.plist */,
 				A9511F8022B65D7A00948518 /* MockAPITests.swift */,
+				A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */,
 			);
 			path = notesTests;
+			sourceTree = "<group>";
+		};
+		A984530722B82CDE00199EBC /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A98452FD22B7B0BD00199EBC /* ErrorPresentable.swift */,
+				A984530522B81ED700199EBC /* HasLoading.swift */,
+				A984530822B82CEC00199EBC /* LoadingViewController */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		A984530822B82CEC00199EBC /* LoadingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A98452FF22B7B3BA00199EBC /* LoadingViewController.swift */,
+				A984530022B7B3BA00199EBC /* LoadingViewController.xib */,
+			);
+			path = LoadingViewController;
+			sourceTree = "<group>";
+		};
+		A984530922B82DC400199EBC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A984530C22B82E2D00199EBC /* NoteService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A984530C22B82E2D00199EBC /* NoteService */ = {
+			isa = PBXGroup;
+			children = (
+				A9511F6822B6459A00948518 /* Models */,
+				A984530D22B82E3A00199EBC /* Networking */,
+				A984530A22B82DD000199EBC /* NoteService.swift */,
+			);
+			path = NoteService;
+			sourceTree = "<group>";
+		};
+		A984530D22B82E3A00199EBC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A9511F7022B64B6E00948518 /* NoteRequest.swift */,
+				A9511F7422B64CD300948518 /* NotesRequest.swift */,
+				A9511F7622B64D2100948518 /* ListNotesRequest.swift */,
+				A9511F7822B64D7D00948518 /* CreateNoteRequest.swift */,
+				A9511F7A22B64DEE00948518 /* GetNoteRequest.swift */,
+				A9511F7C22B64E4600948518 /* UpdateNoteRequest.swift */,
+				A9511F7E22B64EA300948518 /* RemoveNoteRequest.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +378,7 @@
 				A965676922B4372100FA96D2 /* LaunchScreen.storyboard in Resources */,
 				A965676622B4372100FA96D2 /* Assets.xcassets in Resources */,
 				A9463DB922B6D1CF0070896A /* ListTableViewController.xib in Resources */,
+				A984530222B7B3BA00199EBC /* LoadingViewController.xib in Resources */,
 				A9463DBF22B6E75F0070896A /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,15 +464,20 @@
 				A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */,
 				A9511F6722B6448900948518 /* NetworkRequest.swift in Sources */,
 				A9511F7522B64CD300948518 /* NotesRequest.swift in Sources */,
+				A984530622B81ED700199EBC /* HasLoading.swift in Sources */,
 				A9511F6E22B646A300948518 /* NetworkClient.swift in Sources */,
+				A98452FC22B7AE7F00199EBC /* DetailCoordinator.swift in Sources */,
 				A9511F6C22B6469700948518 /* NewNote.swift in Sources */,
 				A9511F7322B64BB100948518 /* EmptyResponse.swift in Sources */,
 				A9511F7B22B64DEE00948518 /* GetNoteRequest.swift in Sources */,
+				A98452FE22B7B0BD00199EBC /* ErrorPresentable.swift in Sources */,
 				A965675F22B4372000FA96D2 /* AppDelegate.swift in Sources */,
+				A984530B22B82DD000199EBC /* NoteService.swift in Sources */,
 				A9511F7D22B64E4600948518 /* UpdateNoteRequest.swift in Sources */,
 				A9463DBE22B6E75F0070896A /* DetailViewController.swift in Sources */,
 				A9511F7722B64D2100948518 /* ListNotesRequest.swift in Sources */,
 				A9511F8322B6679300948518 /* Server.swift in Sources */,
+				A984530122B7B3BA00199EBC /* LoadingViewController.swift in Sources */,
 				A9463DB822B6D1CF0070896A /* ListTableViewController.swift in Sources */,
 				A9463DBB22B6D59D0070896A /* ListCoordinator.swift in Sources */,
 				A9511F7922B64D7D00948518 /* CreateNoteRequest.swift in Sources */,
@@ -433,6 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9511F8122B65D7A00948518 /* MockAPITests.swift in Sources */,
+				A984530422B7BACB00199EBC /* DetailCoordinatorTests.swift in Sources */,
 				A965677422B4372100FA96D2 /* notesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

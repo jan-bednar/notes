@@ -12,6 +12,8 @@ protocol ListTableViewControllerDelegate: AnyObject {
     func listTableViewControllerDelete(note: Note)
     func listTableViewControllerSelect(note: Note)
     func listTableViewControllerRefresh()
+    func listTableViewControllerSearch(text: String?)
+    func listTableViewControllerCreateNewNote()
 }
 
 class ListTableViewController: UITableViewController {
@@ -21,12 +23,24 @@ class ListTableViewController: UITableViewController {
     weak var delegate: ListTableViewControllerDelegate?
     
     private var notes: [Note] = []
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        let createNewNoteItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNewNote))
+        let flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        self.toolbarItems = [flexibleSpaceItem, createNewNoteItem]
+        self.navigationController?.isToolbarHidden = false
         
         self.title = NSLocalizedString("list_title", comment: "List")
     }
@@ -35,6 +49,11 @@ class ListTableViewController: UITableViewController {
         self.notes = notes
         tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        searchController.isActive = false
     }
     
     private func note(at indexPath: IndexPath) -> Note? {
@@ -47,6 +66,16 @@ class ListTableViewController: UITableViewController {
     @objc private func refresh() {
         delegate?.listTableViewControllerRefresh()
     }
+    
+    @objc private func createNewNote() {
+        delegate?.listTableViewControllerCreateNewNote()
+    }
+}
+
+extension ListTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        delegate?.listTableViewControllerSearch(text: searchController.searchBar.text)
+    }
 }
 
 extension ListTableViewController {
@@ -56,6 +85,10 @@ extension ListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
