@@ -11,7 +11,7 @@ import XCTest
 
 class DetailCoordinatorTests: XCTestCase {
 
-    let noteService: NoteService = NoteServiceImpl(networkClient: NetworkClientImpl())
+    let noteService: NoteService = NoteServiceImpl(networkClient: MockNetworkClient())
     let navigationController = UINavigationController()
     
     override func setUp() {

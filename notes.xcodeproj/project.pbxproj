@@ -39,6 +39,9 @@
 		A984530422B7BACB00199EBC /* DetailCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */; };
 		A984530622B81ED700199EBC /* HasLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530522B81ED700199EBC /* HasLoading.swift */; };
 		A984530B22B82DD000199EBC /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530A22B82DD000199EBC /* NoteService.swift */; };
+		A984530F22B8320900199EBC /* NoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530E22B8320900199EBC /* NoteServiceTests.swift */; };
+		A984531122B8399300199EBC /* ListCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531022B8399300199EBC /* ListCoordinatorTests.swift */; };
+		A984531322B839E300199EBC /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531222B839E300199EBC /* MockNetworkClient.swift */; };
 		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +92,9 @@
 		A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinatorTests.swift; sourceTree = "<group>"; };
 		A984530522B81ED700199EBC /* HasLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasLoading.swift; sourceTree = "<group>"; };
 		A984530A22B82DD000199EBC /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
+		A984530E22B8320900199EBC /* NoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteServiceTests.swift; sourceTree = "<group>"; };
+		A984531022B8399300199EBC /* ListCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinatorTests.swift; sourceTree = "<group>"; };
+		A984531222B839E300199EBC /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
 		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +242,9 @@
 				A965677522B4372100FA96D2 /* Info.plist */,
 				A9511F8022B65D7A00948518 /* MockAPITests.swift */,
 				A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */,
+				A984530E22B8320900199EBC /* NoteServiceTests.swift */,
+				A984531022B8399300199EBC /* ListCoordinatorTests.swift */,
+				A984531222B839E300199EBC /* MockNetworkClient.swift */,
 			);
 			path = notesTests;
 			sourceTree = "<group>";
@@ -321,6 +330,7 @@
 				A965676B22B4372100FA96D2 /* Sources */,
 				A965676C22B4372100FA96D2 /* Frameworks */,
 				A965676D22B4372100FA96D2 /* Resources */,
+				98CF521A6E8A2CA97569FC81 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -454,6 +464,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		98CF521A6E8A2CA97569FC81 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-notesTests/Pods-notesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-notesTests/Pods-notesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-notesTests/Pods-notesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -492,8 +519,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9511F8122B65D7A00948518 /* MockAPITests.swift in Sources */,
+				A984531322B839E300199EBC /* MockNetworkClient.swift in Sources */,
+				A984531122B8399300199EBC /* ListCoordinatorTests.swift in Sources */,
 				A984530422B7BACB00199EBC /* DetailCoordinatorTests.swift in Sources */,
 				A965677422B4372100FA96D2 /* notesTests.swift in Sources */,
+				A984530F22B8320900199EBC /* NoteServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,13 +33,12 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
         navigationController.navigationBar.prefersLargeTitles = true
         listViewController.delegate = self
         navigationController.pushViewController(listViewController, animated: animated)
-        let (loadingPromise, loadingViewController) = showLoading(in: listViewController, animated: false)
+        let (loadingPromise, loadingViewController) = showLoading(in: listViewController)
 
         when(fulfilled: loadingPromise, noteService.getNotes())
             .ensure { [weak self] in
                 self?.remove(loadingViewController: loadingViewController)
-            }
-            .done { [weak self] _, notes in
+            }.done { [weak self] _, notes in
                 self?.notes = notes
                 self?.listViewController.update(notes: notes)
             }.catch { [weak self] error in

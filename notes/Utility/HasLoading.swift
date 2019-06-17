@@ -14,6 +14,8 @@ protocol HasLoading {
     func remove(loadingViewController: LoadingViewController) -> Guarantee<Void>
 }
 
+var animationDuration: TimeInterval = 0.3
+
 extension HasLoading {
     func showLoading(in viewController: UIViewController) -> (Guarantee<Void>, LoadingViewController) {
         return showLoading(in: viewController, animated: true)
@@ -25,7 +27,7 @@ extension HasLoading {
             loadingViewController.willMove(toParent: viewController)
             viewController.addChild(loadingViewController)
             
-            UIView.transition(with: viewController.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {
+            UIView.transition(with: viewController.view, duration: animationDuration, options: [.transitionCrossDissolve], animations: {
                 viewController.view.addSubview(loadingViewController.view)
             }) { _ in
                 loadingViewController.didMove(toParent: viewController)
@@ -43,7 +45,7 @@ extension HasLoading {
         
         loadingViewController.willMove(toParent: nil)
         let animation = Guarantee<Void> { seal in
-            UIView.transition(with: superview, duration: 0.3, options: [.transitionCrossDissolve], animations: {
+            UIView.transition(with: superview, duration: animationDuration, options: [.transitionCrossDissolve], animations: {
                 loadingViewController.view.removeFromSuperview()
             }) { _ in
                 loadingViewController.didMove(toParent: nil)
