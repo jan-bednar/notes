@@ -20,6 +20,6 @@ extension ErrorPresentable {
             navigationController?.topViewController?.dismiss(animated: true, completion: nil)
         })
         alertController.addAction(okAction)
-        navigationController?.topViewController?.present(alertController, animated: true)
+        navigationController?.visibleViewController?.present(alertController, animated: true)
     }
 }

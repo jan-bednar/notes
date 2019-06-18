@@ -9,7 +9,7 @@
 import XCTest
 @testable import notes
 
-class ListCoordinatorTests: XCTestCase {
+class ListCoordinatorTests: XCTestCase, CoordinatorTests {
 
     let networkClient = MockNetworkClient()
     lazy var noteService: NoteService = NoteServiceImpl(networkClient: networkClient)
@@ -43,7 +43,7 @@ class ListCoordinatorTests: XCTestCase {
     func test_afterStartWithFailingNetwork_alertIsShown() {
         startCoordinator(shouldFail: true)
         
-        handleTest {
+        waitAfterStart {
             let visibleController = self.navigationController.visibleViewController as? UIAlertController
             
             XCTAssertTrue(visibleController != nil)
@@ -56,7 +56,7 @@ class ListCoordinatorTests: XCTestCase {
         networkClient.shouldFail = true
         coordinator.listTableViewControllerRefresh()
         
-        handleTest {
+        waitAfterStart {
             let visibleController = self.navigationController.visibleViewController as? UIAlertController
             
             XCTAssertTrue(visibleController != nil)
@@ -69,21 +69,10 @@ class ListCoordinatorTests: XCTestCase {
         networkClient.shouldFail = true
         coordinator.listTableViewControllerDelete(note: Note(id: 1, title: "text"))
         
-        handleTest {
+        waitAfterStart {
             let visibleController = self.navigationController.visibleViewController as? UIAlertController
             
             XCTAssertTrue(visibleController != nil)
         }
     }
-    
-    private func handleTest(assertHandler: @escaping () -> Void) {
-        let exp = expectation(description: "waitForAnimations")
-        
-        DispatchQueue.init(label: "test").asyncAfter(deadline: .now() + 0.3) {
-            exp.fulfill()
-            assertHandler()
-        }
-        wait(for: [exp], timeout: 0.4)
-    }
-
 }

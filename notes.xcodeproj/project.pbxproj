@@ -31,7 +31,6 @@
 		A965675F22B4372000FA96D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965675E22B4372000FA96D2 /* AppDelegate.swift */; };
 		A965676622B4372100FA96D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A965676522B4372100FA96D2 /* Assets.xcassets */; };
 		A965676922B4372100FA96D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A965676722B4372100FA96D2 /* LaunchScreen.storyboard */; };
-		A965677422B4372100FA96D2 /* notesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965677322B4372100FA96D2 /* notesTests.swift */; };
 		A98452FC22B7AE7F00199EBC /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98452FB22B7AE7F00199EBC /* DetailCoordinator.swift */; };
 		A98452FE22B7B0BD00199EBC /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98452FD22B7B0BD00199EBC /* ErrorPresentable.swift */; };
 		A984530122B7B3BA00199EBC /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98452FF22B7B3BA00199EBC /* LoadingViewController.swift */; };
@@ -42,6 +41,7 @@
 		A984530F22B8320900199EBC /* NoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984530E22B8320900199EBC /* NoteServiceTests.swift */; };
 		A984531122B8399300199EBC /* ListCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531022B8399300199EBC /* ListCoordinatorTests.swift */; };
 		A984531322B839E300199EBC /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531222B839E300199EBC /* MockNetworkClient.swift */; };
+		A984531622B8E89E00199EBC /* CoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531522B8E89E00199EBC /* CoordinatorTest.swift */; };
 		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,7 +83,6 @@
 		A965676822B4372100FA96D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A965676A22B4372100FA96D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A965676F22B4372100FA96D2 /* notesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = notesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A965677322B4372100FA96D2 /* notesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesTests.swift; sourceTree = "<group>"; };
 		A965677522B4372100FA96D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A98452FB22B7AE7F00199EBC /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
 		A98452FD22B7B0BD00199EBC /* ErrorPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		A984530E22B8320900199EBC /* NoteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteServiceTests.swift; sourceTree = "<group>"; };
 		A984531022B8399300199EBC /* ListCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinatorTests.swift; sourceTree = "<group>"; };
 		A984531222B839E300199EBC /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
+		A984531522B8E89E00199EBC /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
 		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +140,14 @@
 				639DFB5FCDA01E8D8ED5DB97 /* Pods-notesTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A9268FB622B91C71002EE228 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A984531222B839E300199EBC /* MockNetworkClient.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		A9511F6522B6440400948518 /* Networking */ = {
@@ -238,13 +246,11 @@
 		A965677222B4372100FA96D2 /* notesTests */ = {
 			isa = PBXGroup;
 			children = (
-				A965677322B4372100FA96D2 /* notesTests.swift */,
+				A9268FB622B91C71002EE228 /* Mocks */,
+				A984531422B8E88A00199EBC /* CoordinatorTests */,
 				A965677522B4372100FA96D2 /* Info.plist */,
 				A9511F8022B65D7A00948518 /* MockAPITests.swift */,
-				A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */,
 				A984530E22B8320900199EBC /* NoteServiceTests.swift */,
-				A984531022B8399300199EBC /* ListCoordinatorTests.swift */,
-				A984531222B839E300199EBC /* MockNetworkClient.swift */,
 			);
 			path = notesTests;
 			sourceTree = "<group>";
@@ -298,6 +304,16 @@
 				A9511F7E22B64EA300948518 /* RemoveNoteRequest.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		A984531422B8E88A00199EBC /* CoordinatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				A984531522B8E89E00199EBC /* CoordinatorTest.swift */,
+				A984530322B7BACB00199EBC /* DetailCoordinatorTests.swift */,
+				A984531022B8399300199EBC /* ListCoordinatorTests.swift */,
+			);
+			path = CoordinatorTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -522,7 +538,7 @@
 				A984531322B839E300199EBC /* MockNetworkClient.swift in Sources */,
 				A984531122B8399300199EBC /* ListCoordinatorTests.swift in Sources */,
 				A984530422B7BACB00199EBC /* DetailCoordinatorTests.swift in Sources */,
-				A965677422B4372100FA96D2 /* notesTests.swift in Sources */,
+				A984531622B8E89E00199EBC /* CoordinatorTest.swift in Sources */,
 				A984530F22B8320900199EBC /* NoteServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
