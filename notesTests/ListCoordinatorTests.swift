@@ -19,7 +19,9 @@ class ListCoordinatorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        UIApplication.shared.windows.first?.rootViewController = navigationController
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.makeKeyAndVisible()
+        window.rootViewController = navigationController
     }
     
     private func startCoordinator(shouldFail: Bool = false) {
@@ -41,16 +43,11 @@ class ListCoordinatorTests: XCTestCase {
     func test_afterStartWithFailingNetwork_alertIsShown() {
         startCoordinator(shouldFail: true)
         
-        let exp = expectation(description: "waitForAnimations")
-        
-        DispatchQueue.init(label: "test").asyncAfter(deadline: .now() + 0.2) {
-            exp.fulfill()
-            
+        handleTest {
             let visibleController = self.navigationController.visibleViewController as? UIAlertController
             
             XCTAssertTrue(visibleController != nil)
         }
-        wait(for: [exp], timeout: 0.3)
     }
     
     func test_refreshNotesWithFailingNetwork_alertIsShown() {
@@ -59,16 +56,11 @@ class ListCoordinatorTests: XCTestCase {
         networkClient.shouldFail = true
         coordinator.listTableViewControllerRefresh()
         
-        let exp = expectation(description: "waitForAnimations")
-        
-        DispatchQueue.init(label: "test").asyncAfter(deadline: .now() + 0.1) {
-            exp.fulfill()
-            
+        handleTest {
             let visibleController = self.navigationController.visibleViewController as? UIAlertController
             
             XCTAssertTrue(visibleController != nil)
         }
-        wait(for: [exp], timeout: 0.2)
     }
     
     func test_deleteNoteWithFailingNetwork_alertIsShown() {
@@ -77,16 +69,21 @@ class ListCoordinatorTests: XCTestCase {
         networkClient.shouldFail = true
         coordinator.listTableViewControllerDelete(note: Note(id: 1, title: "text"))
         
-        let exp = expectation(description: "waitForAnimations")
-        
-        DispatchQueue.init(label: "test").asyncAfter(deadline: .now() + 0.1) {
-            exp.fulfill()
-            
+        handleTest {
             let visibleController = self.navigationController.visibleViewController as? UIAlertController
             
             XCTAssertTrue(visibleController != nil)
         }
-        wait(for: [exp], timeout: 0.2)
+    }
+    
+    private func handleTest(assertHandler: @escaping () -> Void) {
+        let exp = expectation(description: "waitForAnimations")
+        
+        DispatchQueue.init(label: "test").asyncAfter(deadline: .now() + 0.3) {
+            exp.fulfill()
+            assertHandler()
+        }
+        wait(for: [exp], timeout: 0.4)
     }
 
 }
