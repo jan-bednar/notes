@@ -4,10 +4,11 @@ target 'notes' do
   use_frameworks!
   
   pod 'Alamofire'
-  pod 'PromiseKit/Alamofire'
+  pod 'PromiseKit'
 
   target 'notesTests' do
     inherit! :search_paths
+    pod 'PromiseKit'
   end
 
 end
