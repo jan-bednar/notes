@@ -42,7 +42,7 @@ class ListTableViewController: UITableViewController {
         self.toolbarItems = [flexibleSpaceItem, createNewNoteItem]
         self.navigationController?.isToolbarHidden = false
         
-        self.title = NSLocalizedString("list_title", comment: "List")
+        self.title = L10n.listTitle
     }
     
     func update(notes: [Note]) {

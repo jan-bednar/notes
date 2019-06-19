@@ -40,11 +40,11 @@ class DetailCoordinator: Coordinator, ErrorPresentable, HasLoading {
     }
     
     private func createNote(text: String) {
-        handle(promise: noteService.createNote(text: text), errorMessage: NSLocalizedString("detail_create_note_error", comment: "Creating note has failed"))
+        handle(promise: noteService.createNote(text: text), errorMessage: L10n.detailCreateNoteError)
     }
     
     private func updateNote(text: String, id: Int) {
-        handle(promise: noteService.updateNote(text: text, id: id), errorMessage: NSLocalizedString("detail_update_note_error", comment: "Updating note has failed"))
+        handle(promise: noteService.updateNote(text: text, id: id), errorMessage: L10n.detailUpdateNoteError)
     }
     
     private func remove(note: Note) {
@@ -60,7 +60,7 @@ class DetailCoordinator: Coordinator, ErrorPresentable, HasLoading {
                 self?.navigationController.dismiss(animated: true, completion: nil)
                 self?.delegate?.detailCoordinatorDeleted(note: note)
             }.catch { [weak self] error in
-                let errorMessage = NSLocalizedString("detail_update_note_error", comment: "Deleting note has failed")
+                let errorMessage = L10n.detailRemoveNoteError
                 self?.show(error: error, text: errorMessage, on: self?.navigationController)
             }
     }

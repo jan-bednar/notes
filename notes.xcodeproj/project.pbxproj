@@ -42,6 +42,8 @@
 		A984531122B8399300199EBC /* ListCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531022B8399300199EBC /* ListCoordinatorTests.swift */; };
 		A984531322B839E300199EBC /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531222B839E300199EBC /* MockNetworkClient.swift */; };
 		A984531622B8E89E00199EBC /* CoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531522B8E89E00199EBC /* CoordinatorTest.swift */; };
+		A98AE56722BA75B200F86022 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A98AE56522BA75B200F86022 /* Localizable.strings */; };
+		A98AE56B22BA76C200F86022 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AE56A22BA76C200F86022 /* Strings.swift */; };
 		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		A984531022B8399300199EBC /* ListCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinatorTests.swift; sourceTree = "<group>"; };
 		A984531222B839E300199EBC /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
 		A984531522B8E89E00199EBC /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
+		A98AE56622BA75B200F86022 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A98AE56A22BA76C200F86022 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +206,8 @@
 		A9511F8722B669FD00948518 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A98AE56922BA76BB00F86022 /* Generated */,
+				A98AE56522BA75B200F86022 /* Localizable.strings */,
 				A965676522B4372100FA96D2 /* Assets.xcassets */,
 				A965676722B4372100FA96D2 /* LaunchScreen.storyboard */,
 				A965676A22B4372100FA96D2 /* Info.plist */,
@@ -316,6 +322,14 @@
 			path = CoordinatorTests;
 			sourceTree = "<group>";
 		};
+		A98AE56922BA76BB00F86022 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				A98AE56A22BA76C200F86022 /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,6 +338,7 @@
 			buildConfigurationList = A965677822B4372100FA96D2 /* Build configuration list for PBXNativeTarget "notes" */;
 			buildPhases = (
 				64880568B97F3A3AF7695663 /* [CP] Check Pods Manifest.lock */,
+				A968347B22BA754800CF3CF6 /* Swiftgen */,
 				A965675722B4372000FA96D2 /* Sources */,
 				A965675822B4372000FA96D2 /* Frameworks */,
 				A965675922B4372000FA96D2 /* Resources */,
@@ -402,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A965676922B4372100FA96D2 /* LaunchScreen.storyboard in Resources */,
+				A98AE56722BA75B200F86022 /* Localizable.strings in Resources */,
 				A965676622B4372100FA96D2 /* Assets.xcassets in Resources */,
 				A9463DB922B6D1CF0070896A /* ListTableViewController.xib in Resources */,
 				A984530222B7B3BA00199EBC /* LoadingViewController.xib in Resources */,
@@ -497,6 +513,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-notesTests/Pods-notesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A968347B22BA754800CF3CF6 /* Swiftgen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftgen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Running swiftgen\"\nswiftgen\necho \"Swiftgen finished\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -514,6 +548,7 @@
 				A9511F7322B64BB100948518 /* EmptyResponse.swift in Sources */,
 				A9511F7B22B64DEE00948518 /* GetNoteRequest.swift in Sources */,
 				A98452FE22B7B0BD00199EBC /* ErrorPresentable.swift in Sources */,
+				A98AE56B22BA76C200F86022 /* Strings.swift in Sources */,
 				A965675F22B4372000FA96D2 /* AppDelegate.swift in Sources */,
 				A984530B22B82DD000199EBC /* NoteService.swift in Sources */,
 				A9511F7D22B64E4600948518 /* UpdateNoteRequest.swift in Sources */,
@@ -560,6 +595,14 @@
 				A965676822B4372100FA96D2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A98AE56522BA75B200F86022 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A98AE56622BA75B200F86022 /* Base */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
