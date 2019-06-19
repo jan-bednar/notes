@@ -1,0 +1,5 @@
+strings:
+  inputs: notes/Resources/Base.lproj/Localizable.strings
+  outputs:
+    - templatePath: fallback-structured-swift4.stencil
+      output: notes/Resources/Generated/Strings.swift

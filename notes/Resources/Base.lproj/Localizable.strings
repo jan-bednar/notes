@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  notes
+
+  Created by Jan Bednar on 19/06/2019.
+  Copyright © 2019 bednarjan. All rights reserved.
+*/
+"general_alert_title" = "Oops, tha's not good!";
+"general_ok" = "OK";
+"detail_create_note_error" = "Creating note has failed";
+"detail_update_note_error" = "Updating note has failed";
+"detail_remove_note_error" = "Deleting note has failed";
+"list_get_notes_error" = "Could not download notes";
+"list_get_notes_error" = "Could not download notes";
+"list_delete_note_error" = "Deleting note has failed";
+"list_title" = "List";

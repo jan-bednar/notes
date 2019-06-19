@@ -43,7 +43,7 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
                 self?.listViewController.update(notes: notes)
             }.catch { [weak self] error in
                 self?.listViewController.update(notes: self?.notes ?? [])
-                self?.show(error: error, text: NSLocalizedString("list_get_notes_error", comment: "Could not download notes"), on: self?.navigationController)
+                self?.show(error: error, text: L10n.listGetNotesError, on: self?.navigationController)
         }
     }
     
@@ -68,7 +68,7 @@ class ListCoordinator: Coordinator, ErrorPresentable, HasLoading {
                 self?.listViewController.update(notes: notes)
             }.catch { [weak self] error in
                 self?.listViewController.update(notes: self?.notes ?? [])
-                self?.show(error: error, text: NSLocalizedString("list_get_notes_error", comment: "Could not download notes"), on: self?.navigationController)
+                self?.show(error: error, text: L10n.listGetNotesError, on: self?.navigationController)
             }
     }
 }
@@ -90,7 +90,7 @@ extension ListCoordinator: ListTableViewControllerDelegate {
     func listTableViewControllerDelete(note: Note) {
         noteService.remove(note: note)
             .catch { [weak self] error in
-                self?.show(error: error, text: NSLocalizedString("list_delete_note_error", comment: "Deleting note has failed"), on: self?.navigationController)
+                self?.show(error: error, text: L10n.listDeleteNoteError, on: self?.navigationController)
             }
     }
     
