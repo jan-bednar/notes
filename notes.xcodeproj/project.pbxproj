@@ -44,6 +44,7 @@
 		A984531622B8E89E00199EBC /* CoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A984531522B8E89E00199EBC /* CoordinatorTest.swift */; };
 		A98AE56722BA75B200F86022 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A98AE56522BA75B200F86022 /* Localizable.strings */; };
 		A98AE56B22BA76C200F86022 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AE56A22BA76C200F86022 /* Strings.swift */; };
+		A98AE56D22BA787F00F86022 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A98AE56C22BA787F00F86022 /* README.md */; };
 		A999C11D22B43A120020F475 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A999C11C22B43A120020F475 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		A984531522B8E89E00199EBC /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
 		A98AE56622BA75B200F86022 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A98AE56A22BA76C200F86022 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		A98AE56C22BA787F00F86022 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A999C11C22B43A120020F475 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		AB34BA69487850FC98250639 /* Pods-notes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notes.debug.xcconfig"; path = "Target Support Files/Pods-notes/Pods-notes.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAD6FF35D063F65A45FF8BE /* Pods_notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 		A965675222B4372000FA96D2 = {
 			isa = PBXGroup;
 			children = (
+				A98AE56C22BA787F00F86022 /* README.md */,
 				A965675D22B4372000FA96D2 /* notes */,
 				A965677222B4372100FA96D2 /* notesTests */,
 				A965675C22B4372000FA96D2 /* Products */,
@@ -419,6 +422,7 @@
 				A965676922B4372100FA96D2 /* LaunchScreen.storyboard in Resources */,
 				A98AE56722BA75B200F86022 /* Localizable.strings in Resources */,
 				A965676622B4372100FA96D2 /* Assets.xcassets in Resources */,
+				A98AE56D22BA787F00F86022 /* README.md in Resources */,
 				A9463DB922B6D1CF0070896A /* ListTableViewController.xib in Resources */,
 				A984530222B7B3BA00199EBC /* LoadingViewController.xib in Resources */,
 				A9463DBF22B6E75F0070896A /* DetailViewController.xib in Resources */,
