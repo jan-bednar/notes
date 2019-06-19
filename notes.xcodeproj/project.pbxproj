@@ -241,9 +241,9 @@
 		A965675D22B4372000FA96D2 /* notes */ = {
 			isa = PBXGroup;
 			children = (
-				A984530922B82DC400199EBC /* Services */,
 				A965675E22B4372000FA96D2 /* AppDelegate.swift */,
 				A999C11C22B43A120020F475 /* AppCoordinator.swift */,
+				A984530922B82DC400199EBC /* Services */,
 				A984530722B82CDE00199EBC /* Utility */,
 				A9511F8622B669F200948518 /* Scenes */,
 				A9511F6522B6440400948518 /* Networking */,
