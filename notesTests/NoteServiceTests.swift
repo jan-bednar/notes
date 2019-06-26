@@ -53,7 +53,9 @@ class NoteServiceTests: XCTestCase {
         sut.remove(note: note)
             .done {
                 XCTFail("Removing note ended with success, even though it should have failed!")
-            }.cauterize()
+            }.catch { error in
+                XCTAssertEqual( (error as NSError).code, 3)
+            }
     }
     
     func test_getNotes_returnsNotesSortedWithDescendingOrder() {
